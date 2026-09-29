@@ -1,35 +1,57 @@
-const dificuldade = 100
-const marge = 5
+var dificuldade = 3
+var marge = 2
+var velocidade = 100
 var tempo = 100
+const operadores = ["+", "-", "x", "/"]
+var operador = operadores[Math.floor(Math.random() * operadores.length)]
+
 function gerarConta(){
     number1 = Math.floor(Math.random() * dificuldade) + marge
     number2 = Math.floor(Math.random() * dificuldade) + marge
+    operador = operadores[Math.floor(Math.random() * operadores.length)];
+}
+
+function resolverConta(){
+    if(operador == "+"){ return number1 + number2}
+    if(operador == "-"){ return number1 - number2}
+    if(operador == "X"){ return number1 * number2}
+    if(operador == "/"){ return (number1*number2) / number2}
 }
 
 function atualizar(){
-    if (document.getElementById("result").value == (number1 + number2)) {
+    if (document.getElementById("result").value == resolverConta()) {
             document.getElementById("descri").textContent = "acerto"
+            dificuldade = dificuldade + 5
+            marge = marge + 1
+            velocidade = velocidade - 1
+            console.log(dificuldade + " " + marge  + " " + velocidade)
         } else {
             document.getElementById("descri").textContent = "erro"
+            dificuldade = 10
+            marge = 2
+            velocidade = 100
         }
         document.getElementById("descri").style.display = "flex"
     gerarConta()
-    document.getElementById("conta").textContent = `${number1} + ${number2}`;
+    document.getElementById("conta").textContent = `${(number1*number2)} ${operador} ${number2}`;
 }
 
- const timer = setInterval(() => {
-    if(tempo > 0){
-        tempo = tempo - 1;
-    } else{
+function iniciarTimer() {
+    if (tempo > 0) {
+        tempo--;
+    } else {
         tempo = 100
-        atualizar() 
-
+        atualizar();
     }
+
     document.getElementById("tempo").value = tempo;
-}, 100);
+
+    setTimeout(iniciarTimer, velocidade);
+}
+iniciarTimer();
 
 gerarConta()
-document.getElementById("conta").textContent = `${number1} + ${number2}`;
+document.getElementById("conta").textContent = `${(number1*number2)} ${operador} ${number2}`;
 document.getElementById("descri").style.display = "none"
 
 document.getElementById("result").addEventListener("keydown", function (event) {

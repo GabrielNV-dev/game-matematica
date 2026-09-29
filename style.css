@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 body {
     background-color: rgb(92, 28, 151);
     display: flex;
@@ -8,30 +11,41 @@ body {
 }
 
 button {
+    border: 2px solid black;
     border-radius: 5px;
-    border-color: black;
     background-color: aqua;
     margin-top: 10px;
     height: 40px;
     width: 100px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 15;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: #00cccc;
+    transform: scale(1.05);
 }
 
 h2 {
     margin: 10px;
-    width: 250px;
+    width: 500px;
     font-size: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
 }
-#result{
-    background-color: rgb(255, 255, 255);
+#result {
+    background-color: white;
     border-radius: 5px;
     height: 30px;
     width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
 }
 #acerto,#erro{
     display: none;
@@ -41,7 +55,14 @@ p{
     color: white;
     margin: 0px;
 }
-progress{
-    color: aqua;
-    transition: ease 0.3s;
+progress {
+    width: 200px;
+    height: 20px;
+    accent-color: aqua;
+}
+div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
