@@ -7,9 +7,8 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 100vh;
+    height: 90vh;
 }
-
 button {
     border: 2px solid black;
     border-radius: 5px;
@@ -55,6 +54,9 @@ p{
     color: white;
     margin: 0px;
 }
+#morte{
+    display: none;
+}
 progress {
     width: 200px;
     height: 20px;
@@ -65,4 +67,7 @@ div{
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+#classico{
+    display: none;
 }
