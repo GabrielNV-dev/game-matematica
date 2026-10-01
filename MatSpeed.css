@@ -8,8 +8,9 @@ body {
     justify-content: center;
     flex-direction: column;
     height: 90vh;
+    
+    transition: background-color 10s;
 }
-
 button {
     border: 2px solid black;
     border-radius: 5px;
@@ -39,4 +40,39 @@ h2 {
     align-items: center;
     justify-content: center;
     color: white;
+}
+#result {
+    background-color: white;
+    border-radius: 5px;
+    height: 30px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+}
+#acerto,#erro{
+    display: none;
+}
+p{
+    font-size: 20px;
+    color: white;
+    margin: 0px;
+}
+#morte{
+    display: none;
+}
+progress {
+    width: 200px;
+    height: 20px;
+    accent-color: aqua;
+}
+div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#classico{
+    display: none;
 }
