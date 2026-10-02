@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg-main: #120924;
+    --card-bg: rgba(255, 255, 255, 0.06);
+    --card-border: rgba(255, 255, 255, 0.12);
+    --primary: #00f2fe;
+    --primary-hover: #4facfe;
+    --accent-red: #ff4757;
+    --accent-green: #2ed573;
+    --accent-yellow: #ffa502;
+    --text-color: #ffffff;
+    --text-muted: #a0a0c0;
+}
+
+body {
+    background-color: var(--bg-main);
+    background-image: radial-gradient(circle at center, #2a114d 0%, var(--bg-main) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    gap: 12px;
+}
+
+/* Base de Botões Modernos */
+button {
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+    color: #0c0814;
+    font-weight: 700;
+    height: 45px;
+    padding: 0 20px;
+    font-family: inherit;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(0, 242, 254, 0.4);
+}
+
+button:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Containers de Tela (Efeito Glassmorphism) */
+#configuracoes, #classico {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    gap: 15px;
+    width: 90%;
+    max-width: 480px;
+}
+
+#configuracoes {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#classico {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Painel de Informações */
+#infos {
+    background: rgba(0, 0, 0, 0.25);
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    color: var(--primary);
+    font-weight: 600;
+    border: 1px solid rgba(0, 242, 254, 0.2);
+    margin-bottom: 10px;
+}
+
+/* Botões de Dificuldade Personalizados */
+.div-botao {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.configuracao#facil {
+    background: var(--accent-green);
+    color: #000;
+    box-shadow: 0 4px 12px rgba(46, 213, 115, 0.3);
+}
+
+.configuracao#medio {
+    background: var(--accent-yellow);
+    color: #000;
+    box-shadow: 0 4px 12px rgba(255, 165, 2, 0.3);
+}
+
+.configuracao#dificil {
+    background: var(--accent-red);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
+}
+
+.configuracao#avancado, #jogar {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    border: 1px solid var(--card-border);
+    box-shadow: none;
+}
+
+.configuracao#avancado:hover, #jogar:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Configurações Avançadas */
+#configuracoes-avancadas {
+    margin-top: 10px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+/* Customização dos Inputs */
+.configs, #result {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    height: 42px;
+    width: 100%;
+    padding: 0 15px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 15px;
+    text-align: center;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.configs:focus, #result:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+}
+
+.operadores {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.ativo {
+    margin: 0;
+    background: var(--accent-green);
+    color: #000;
+    height: 30px;
+    width: 45px;
+    font-size: 13px;
+    border-radius: 6px;
+    box-shadow: none;
+}
+
+/* Área do Jogo Clássico */
+h2#conta {
+    width: 100%;
+    font-size: 48px;
+    font-weight: 800;
+    margin: 15px 0;
+    color: var(--primary);
+    text-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+}
+
+#info {
+    font-size: 15px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+#morte {
+    color: var(--accent-red);
+    font-size: 36px;
+    font-weight: 800;
+    text-shadow: 0 0 15px rgba(255, 71, 87, 0.5);
+    display: none;
+}
+
+/* Barra de Progresso Customizada */
+progress {
+    width: 100%;
+    height: 12px;
+    border-radius: 10px;
+    overflow: hidden;
+    appearance: none;
+}
+
+progress::-webkit-progress-bar {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+    background: linear-gradient(90deg, var(--primary), var(--accent-green));
+    border-radius: 10px;
+    transition: width 0.2s ease;
+}
+
+#result {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
