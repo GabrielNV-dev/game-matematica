@@ -12,7 +12,45 @@
     <button class="modo" id="ilimitado">ilimitado</button>
     <button class="modo" id="ultima vida">ultima vida</button>
     <button class="modo" id="contra tempo">contra tempo</button>
-    <button class="modo" id="técnico">técnico</button>
+    <button class="modo" id="tecnico">técnico</button>
+    <div id="configuracoes">
+        <nav id="infos">Vida: 3 | Tempo: 100s | Dificuldade: facil</nav>
+        <div class="div-botao">
+            <button class="configuracao" id="facil">facil</button>
+            <button class="configuracao" id="medio">médio</button>
+            <button class="configuracao" id="dificil">dificil</button>
+        </div>
+        <div class="div-botao">
+            <button class="configuracao" id="avancado">avançado ↓</button>
+            <button class="configuracao" id="jogar">jogar -></button>
+        </div>
+        <div id="configuracoes-avancadas">
+            <div class="div-botao">
+                <input class = "configs" id="config-tempo" type="number" placeholder="tempo | padrão:100">
+                <input class = "configs" id="config-dificuldade" type="number" placeholder="dificuldade | padrão:100">
+            </div>
+            <input class = "configs" id ="config-vida" type="number" placeholder="vida | padrão:3">
+
+            <div class="div-botao">
+                <p class="operadores"> + adicionado: </p>
+                <button id="+" class="ativo"> S </button>
+            </div>
+            <div class="div-botao">
+                <p class="operadores"> - adicionado: </p>
+                <button id="-" class="ativo"> S </button>
+            </div>
+            <div class="div-botao">
+                <p class="operadores"> x adicionado: </p>
+                <button id="x" class="ativo"> S </button>
+            </div>
+            <div class="div-botao">
+
+                <p class="operadores"> / adicionado: </p>
+                <button id="/" class="ativo"> S </button>
+            </div>
+        </div>
+
+    </div>
     <div id="classico">
         <p id="info">acertos: 0 série: 0 erros: 0</p>
         <p id="vida"></p>

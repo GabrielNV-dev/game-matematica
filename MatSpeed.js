@@ -1,28 +1,81 @@
 var modo = "normal"
 let timer
+function comecar() {
+    document.body.style.backgroundColor = "black"
+    document.getElementById("classico").style.display = "flex"
+    iniciarTimer();
+    gerarConta()
+    if (operador == "/") {
+        document.getElementById("conta").textContent = `${(number1 * number2)} ${operador} ${number2}`;
+    } else {
+        document.getElementById("conta").textContent = `${number1} ${operador} ${number2}`;
+    }
 
+    if (modo == "contra tempo") { } else { document.getElementById("vida").textContent = "❤️ ".repeat(vida) }
+    document.getElementById("descri").style.display = "none"
+}
+
+let avancado = 0
+let nivel = "facil"
+let tempo_ref = 100
+let contagem = [1, 1, 1, 1]
+var operadores = ["+", "-", "x", "/"]
+
+document.querySelectorAll(".configs").forEach(function (elemento) {
+    elemento.addEventListener("keydown", function (event) {
+
+        if (event.key === "Enter") {
+            modo = elemento.id
+
+            if (modo == "config-tempo") { tempo = elemento.value; tempo_ref = elemento.value }
+            else if (modo == "config-dificuldade") { dificuldade = elemento.value }
+            else if (modo == "config-vida") { vida = elemento.value }
+
+
+            document.getElementById("infos").textContent = `Vida: ${vida} | Tempo: ${tempo}s | Dificuldade: ${nivel}`
+        }
+    })
+})
+
+
+document.querySelectorAll(".ativo").forEach(function (elemento) {
+    elemento.addEventListener("click", function (event) {
+        modo = elemento.id
+
+        if (modo == "+") { if (contagem[0] == 1) { contagem[0] = 0; document.getElementById("+").style.backgroundColor = "rgb(248, 12, 12)"; document.getElementById("+").textContent = "N"; } else { ; contagem[0] = 1; document.getElementById("+").style.backgroundColor = "rgb(9, 255, 9)"; document.getElementById("+").textContent = "S" } }
+        else if (modo == "-") { if (contagem[1] == 1) { contagem[1] = 0; document.getElementById("-").style.backgroundColor = "rgb(248, 12, 12)"; document.getElementById("-").textContent = "N" } else { ; contagem[1] = 1; document.getElementById("-").style.backgroundColor = "rgb(9, 255, 9)"; document.getElementById("-").textContent = "S" } }
+        else if (modo == "x") { if (contagem[2] == 1) { contagem[2] = 0; document.getElementById("x").style.backgroundColor = "rgb(248, 12, 12)"; document.getElementById("x").textContent = "N"; } else { ; contagem[2] = 1; document.getElementById("x").style.backgroundColor = "rgb(9, 255, 9)"; document.getElementById("x").textContent = "S" } }
+        else if (modo == "/") { if (contagem[3] == 1) { contagem[3] = 0; document.getElementById("/").style.backgroundColor = "rgb(248, 12, 12)"; document.getElementById("/").textContent = "N"; } else { ; contagem[3] = 1; document.getElementById("/").style.backgroundColor = "rgb(9, 255, 9)"; document.getElementById("/").textContent = "S" } }
+
+        let operadoresAtivos = operadores.filter(
+            (operador, indice) => contagem[indice] === 1
+        );
+    })
+})
+
+document.querySelectorAll(".configuracao").forEach(function (elemento) {
+    elemento.addEventListener("click", function (event) {
+        modo = elemento.id
+
+        if (modo == "facil") { vida = 3; tempo = 100; tempo_ref = 100; dificuldade = 10; nivel = "facil" }
+        else if (modo == "medio") { vida = 3; tempo = 90; tempo_ref = 100; dificuldade = 20; nivel = "médio" }
+        else if (modo == "dificil") { vida = 2; tempo = 70; tempo_ref = 100; dificuldade = 40; nivel = "dificil" }
+        else if (modo == "avancado") { if (avancado == 0) { document.getElementById("configuracoes-avancadas").style.display = "flex"; document.getElementById("avancado").textContent = "avançado ^"; avancado = 1 } else { document.getElementById("configuracoes-avancadas").style.display = "none"; document.getElementById("avancado").textContent = "avançado ↓"; avancado = 0 } }
+        else if (modo == "avancado") { document.getElementById("configuracoes-avancadas").style.display = "flex" }
+        else if (modo == "jogar") { document.getElementById("configuracoes").style.display = "none"; comecar() }
+
+        document.getElementById("infos").textContent = `Vida: ${vida} | Tempo: ${tempo}s | Dificuldade: ${nivel}`
+    })
+})
 document.querySelectorAll(".modo").forEach(function (elemento) {
     elemento.addEventListener("click", function (event) {
         modo = elemento.id
-        document.body.style.backgroundColor = "black"
         if (modo == "ultima vida") { vida = 1 }
-        else if (modo == "técnico") { }
-        if (modo == "voltar") { window.location.reload() }
+        else if (modo == "voltar") { window.location.reload() }
+        if (modo == "tecnico") {
+            document.getElementById("configuracoes").style.display = "flex"
+        } else { comecar() }
         document.querySelectorAll(".modo").forEach(function (botoes) { botoes.style.display = "none" })
-        document.getElementById("classico").style.display = "flex"
-        iniciarTimer();
-        gerarConta()
-        if (operador == "/") {
-            document.getElementById("conta").textContent = `${(number1 * number2)} ${operador} ${number2}`;
-        } else {
-            document.getElementById("conta").textContent = `${number1} ${operador} ${number2}`;
-        }
-
-        if (modo == "contra tempo") { } else { document.getElementById("vida").textContent = "❤️ ".repeat(vida) }
-        document.getElementById("descri").style.display = "none"
-        
-        if (modo == "ilimitado") {  document.getElementById("voltar").style.display = "flex" }
-
     })
 })
 
@@ -35,8 +88,6 @@ var vida = 3
 var serie = 0
 var acerto = 0
 var erros = 0
-
-const operadores = ["+", "-", "x", "/"]
 var operador = operadores[Math.floor(Math.random() * operadores.length)]
 
 function encerrar() {
@@ -51,7 +102,10 @@ function encerrar() {
 }
 
 function gerarConta() {
-    operador = operadores[Math.floor(Math.random() * operadores.length)];
+    let operadoresAtivos = operadores.filter(
+        (operador, indice) => contagem[indice] === 1
+    );
+    operador = operadoresAtivos[Math.floor(Math.random() * operadoresAtivos.length)];
     number1 = Math.floor(Math.random() * (dificuldade - (dificuldade * 0.7))) + 2
     number2 = Math.floor(Math.random() * (dificuldade - (dificuldade * 0.7))) + 2
 
@@ -94,7 +148,7 @@ function atualizar() {
         serie++
     } else {
         document.getElementById("descri").textContent = "erro"
-        if (modo == "ilimitado") {} else {vida--}
+        if (modo == "ilimitado" || modo == "contra tempo") { } else { vida-- }
         dificuldade = dificuldade - 2
         velocidade = 100
         serie = 0
@@ -112,15 +166,18 @@ function atualizar() {
 
 }
 function iniciarTimer() {
-    timer = setTimeout(iniciarTimer, velocidade);
 
-    if (vida == 0) {
+
+    if (modo == "ilimitado") { document.getElementById("voltar").style.display = "flex" }
+    timer = setTimeout(iniciarTimer, velocidade);
+    console.log(vida)
+    if (vida <= 0) {
         encerrar()
     }
     if (tempo > 0) {
         tempo--;
     } else {
-        if (modo == "contra tempo") { } else { tempo = 100 }
+        if (modo == "contra tempo") { } else { tempo = tempo_ref }
         atualizar();
     }
     document.getElementById("tempo").value = tempo;
@@ -130,7 +187,8 @@ document.getElementById("result").addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
 
         atualizar()
-        if (modo == "contra tempo") { } else { tempo = 100 }
+
+        if (modo == "contra tempo") { } else { tempo = tempo_ref }
         document.getElementById("result").value = ""
     }
 });
